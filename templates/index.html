@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Parking System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="dashboard-header card">
+        <div>
+          <h1>🚗 Smart Parking Dashboard</h1>
+          <p>Check available slots and book instantly.</p>
+        </div>
+        <a class="admin-link" href="{{ url_for('admin_panel') }}">Admin Panel</a>
+      </header>
+
+      <section class="legend card">
+        <span><i class="dot available"></i> Available</span>
+        <span><i class="dot booked"></i> Booked</span>
+      </section>
+
+      <section id="slotGrid" class="slot-grid" aria-live="polite"></section>
+    </main>
+
+    <!-- Booking Popup -->
+    <div id="bookingModal" class="modal hidden">
+      <div class="modal-content">
+        <button id="closeModal" class="close-btn" aria-label="Close">×</button>
+        <h2>Book Slot <span id="slotNumberText"></span></h2>
+        <form id="bookingForm">
+          <input type="hidden" id="selectedSlotId" />
+
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required />
+
+          <label for="vehicle">Vehicle Number</label>
+          <input type="text" id="vehicle" placeholder="Enter vehicle number" required />
+
+          <div class="form-actions">
+            <button type="submit" id="validateBookingBtn" class="btn btn-primary">Validate Booking</button>
+            <button type="button" id="payBtn" class="btn btn-success" disabled>Fake Payment</button>
+          </div>
+        </form>
+
+        <div id="loader" class="loader hidden"></div>
+        <p id="messageBox" class="message-box"></p>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

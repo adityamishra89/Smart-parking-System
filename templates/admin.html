@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Smart Parking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="dashboard-header card">
+        <div>
+          <h1>🧾 Booking Administration</h1>
+          <p>All parking reservations in one place.</p>
+        </div>
+        <a class="admin-link" href="{{ url_for('index') }}">Back to Dashboard</a>
+      </header>
+
+      <section class="card table-wrapper">
+        {% if error %}
+        <p class="error-text">Error: {{ error }}</p>
+        {% endif %}
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Vehicle Number</th>
+              <th>Slot Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if bookings %}
+              {% for booking in bookings %}
+              <tr>
+                <td>{{ booking.name }}</td>
+                <td>{{ booking.vehicle }}</td>
+                <td>{{ booking.slot_id }}</td>
+              </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="3">No bookings found.</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
